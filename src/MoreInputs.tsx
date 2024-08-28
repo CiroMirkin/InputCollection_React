@@ -31,9 +31,9 @@ function MoreInputs({ children }: MoreInputsParams) {
     /** Genera una lista con inputs */
     const renderInputs = () => {
         setInputs(
-            ins.map(({ id, content }) =>
+            ins.map(({ id }) =>
                 <div key={id}>
-                    <input id={id} type="password" value={content} />
+                    <Input id={id} />
                 </div>
             )
         )
@@ -51,8 +51,8 @@ function MoreInputs({ children }: MoreInputsParams) {
 
     return (
         <>
-            { inputs }
             <MoreInputsContext.Provider value={{ addInput, setIns, ins }} >
+                { inputs }
                 { children }
             </MoreInputsContext.Provider>
         </>
@@ -70,3 +70,40 @@ function AddInputBtn({ children }: { children?: React.ReactNode }) {
 }
 
 MoreInputs.AddInputBtn = AddInputBtn
+
+
+interface InputParams {
+    id: string
+}
+
+function Input({ id }: InputParams) {
+    const { ins, setIns } = useContext(MoreInputsContext)
+
+    const getInputValue = (): string => {
+        return ins.filter(inputData => inputData.id === id)[0].content
+    }
+
+    const handleChange = (inputValue: string) => {
+        const newIns = ins.map(inputData => {
+            if(inputData.id === id) {
+                return {
+                    ...inputData,
+                    content: inputValue
+                }
+            }
+            return {...inputData}
+        })
+
+        console.table(newIns)
+        setIns(newIns)
+    }
+
+    return(
+        <input 
+            id={id} 
+            type="text" 
+            value={getInputValue()} 
+            onChange={e => handleChange(e.target.value)}
+        />
+    )
+}
