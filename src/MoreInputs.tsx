@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react"
+import React, { ComponentType, createContext, useContext, useEffect, useState } from "react"
 
 export interface InputData {
     id: string
@@ -8,7 +8,7 @@ export interface InputData {
 const MoreInputsContext = createContext({ addInput: () => {}, ins: [], setIns: () => {} } as { addInput: () => void, ins: InputData[], setIns: any })
 
 
-const inputsData: InputData[] = [
+const testInputData: InputData[] = [
     {
       id: '1',
       content: 'pipi'
@@ -25,34 +25,36 @@ interface MoreInputsParams {
 }
 
 function MoreInputs({ children }: MoreInputsParams) {
-    const [ ins, setIns ] = useState([...inputsData])
-    const [inputs, setInputs] = useState([] as React.ReactNode[])
+    /** Lista con el contenido de los inputs */
+    const [ inputs, setInputs ] = useState([...testInputData])
+    /** Lista de componentes Input */
+    const [inputList, setInputList] = useState([] as React.ReactNode[])
 
     /** Genera una lista con inputs */
     const renderInputs = () => {
-        setInputs(
-            ins.map(({ id }) =>
+        setInputList(
+            inputs.map(({ id }) =>
                 <div key={id}>
                     <Input id={id} />
                 </div>
             )
         )
     }
-    useEffect(renderInputs, [ins.length])
+    useEffect(renderInputs, [inputs.length])
     
     const addInput = () => {
         const newInput: InputData = {
             id: crypto.randomUUID(),
             content: ''
         }
-        const newInputsData = [...ins, {...newInput}]
-        setIns(newInputsData)
+        const newInputsData = [...inputs, {...newInput}]
+        setInputs(newInputsData)
     }
 
     return (
         <>
-            <MoreInputsContext.Provider value={{ addInput, setIns, ins }} >
-                { inputs }
+            <MoreInputsContext.Provider value={{ addInput, setIns: setInputs, ins: inputs }} >
+                { inputList }
                 { children }
             </MoreInputsContext.Provider>
         </>
@@ -70,6 +72,12 @@ function AddInputBtn({ children }: { children?: React.ReactNode }) {
 }
 
 MoreInputs.AddInputBtn = AddInputBtn
+
+function CustomInput<P>(Input: ComponentType<P>) {
+    return (props: any) => <Input {...props} />
+}
+
+MoreInputs.CustomInput = CustomInput
 
 
 interface InputParams {
