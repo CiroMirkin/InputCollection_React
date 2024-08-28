@@ -5,8 +5,19 @@ export interface InputData {
     content: string
 }
 
-const MoreInputsContext = createContext({ addInput: () => {}, inputs: [], setInputs: () => {} } as { addInput: () => void, inputs: InputData[], setInputs: any })
+interface MoreInputsContextObj { 
+    addInput: () => void, 
+    inputs: InputData[], 
+    setInputs: React.Dispatch<React.SetStateAction<InputData[]>>
+}
 
+const MoreInputsContextDefault: MoreInputsContextObj = { 
+    addInput: () => {}, 
+    inputs: [], 
+    setInputs: () => {} 
+}
+
+const MoreInputsContext = createContext(MoreInputsContextDefault)
 
 const testInputData: InputData[] = [
     {
