@@ -1,12 +1,12 @@
-import React, { createContext, useContext, useState } from "react"
-
-
-const MoreInputsContext = createContext({ addInput: () => {} } as { addInput: () => void })
+import React, { createContext, useContext, useEffect, useState } from "react"
 
 export interface InputData {
     id: string
     content: string
 }
+
+const MoreInputsContext = createContext({ addInput: () => {}, ins: [], setIns: () => {} } as { addInput: () => void, ins: InputData[], setIns: any })
+
 
 const inputsData: InputData[] = [
     {
@@ -25,33 +25,34 @@ interface MoreInputsParams {
 }
 
 function MoreInputs({ children }: MoreInputsParams) {
+    const [ ins, setIns ] = useState([...inputsData])
     const [inputs, setInputs] = useState([] as React.ReactNode[])
 
     /** Genera una lista con inputs */
     const renderInputs = () => {
         setInputs(
-            inputsData.map(({ id, content }) =>
+            ins.map(({ id, content }) =>
                 <div key={id}>
                     <input id={id} type="password" value={content} />
                 </div>
             )
         )
     }
-
+    useEffect(renderInputs, [ins.length])
+    
     const addInput = () => {
         const newInput: InputData = {
             id: crypto.randomUUID(),
             content: ''
         }
-        inputsData.push({...newInput})
-        renderInputs()
-        console.table(inputsData)
+        const newInputsData = [...ins, {...newInput}]
+        setIns(newInputsData)
     }
 
     return (
         <>
             { inputs }
-            <MoreInputsContext.Provider value={{ addInput }} >
+            <MoreInputsContext.Provider value={{ addInput, setIns, ins }} >
                 { children }
             </MoreInputsContext.Provider>
         </>
