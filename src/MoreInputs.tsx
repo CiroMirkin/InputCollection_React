@@ -19,25 +19,14 @@ const MoreInputsContextDefault: MoreInputsContextObj = {
 
 const MoreInputsContext = createContext(MoreInputsContextDefault)
 
-const testInputData: InputData[] = [
-    {
-      id: '1',
-      content: 'pipi'
-    },
-    {
-      id: '2',
-      content: 'pupu'
-    }
-  ]
-
 interface MoreInputsParams {
+    inputs: InputData[]
+    setInputs: React.Dispatch<React.SetStateAction<InputData[]>>
     children: React.ReactNode
     type?: 'text' | 'password' | 'number'
 }
 
-function MoreInputs({ children }: MoreInputsParams) {
-    /** Lista con el contenido de los inputs */
-    const [ inputs, setInputs ] = useState([...testInputData])
+function MoreInputs({ children, inputs, setInputs }: MoreInputsParams) {
     /** Lista de componentes Input */
     const [inputList, setInputList] = useState([] as React.ReactNode[])
 
