@@ -5,7 +5,7 @@ export interface InputData {
     content: string
 }
 
-const MoreInputsContext = createContext({ addInput: () => {}, ins: [], setIns: () => {} } as { addInput: () => void, ins: InputData[], setIns: any })
+const MoreInputsContext = createContext({ addInput: () => {}, inputs: [], setInputs: () => {} } as { addInput: () => void, inputs: InputData[], setInputs: any })
 
 
 const testInputData: InputData[] = [
@@ -53,7 +53,7 @@ function MoreInputs({ children }: MoreInputsParams) {
 
     return (
         <>
-            <MoreInputsContext.Provider value={{ addInput, setIns: setInputs, ins: inputs }} >
+            <MoreInputsContext.Provider value={{ addInput, setInputs, inputs }} >
                 { inputList }
                 { children }
             </MoreInputsContext.Provider>
@@ -85,14 +85,14 @@ interface InputParams {
 }
 
 function Input({ id }: InputParams) {
-    const { ins, setIns } = useContext(MoreInputsContext)
+    const { inputs, setInputs } = useContext(MoreInputsContext)
 
     const getInputValue = (): string => {
-        return ins.filter(inputData => inputData.id === id)[0].content
+        return inputs.filter(inputData => inputData.id === id)[0].content
     }
 
     const handleChange = (inputValue: string) => {
-        const newIns = ins.map(inputData => {
+        const newIns = inputs.map(inputData => {
             if(inputData.id === id) {
                 return {
                     ...inputData,
@@ -103,7 +103,7 @@ function Input({ id }: InputParams) {
         })
 
         console.table(newIns)
-        setIns(newIns)
+        setInputs(newIns)
     }
 
     return(
