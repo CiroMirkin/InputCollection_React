@@ -27,21 +27,6 @@ interface MoreInputsParams {
 }
 
 function MoreInputs({ children, inputs, setInputs }: MoreInputsParams) {
-    /** Lista de componentes Input */
-    const [inputList, setInputList] = useState([] as React.ReactNode[])
-
-    /** Genera una lista con inputs */
-    const renderInputs = () => {
-        setInputList(
-            inputs.map(({ id }) =>
-                <div key={id}>
-                    <Input id={id} />
-                </div>
-            )
-        )
-    }
-    useEffect(renderInputs, [inputs.length])
-    
     const addInput = () => {
         const newInput: InputData = {
             id: crypto.randomUUID(),
@@ -54,7 +39,6 @@ function MoreInputs({ children, inputs, setInputs }: MoreInputsParams) {
     return (
         <>
             <MoreInputsContext.Provider value={{ addInput, setInputs, inputs }} >
-                { inputList }
                 { children }
             </MoreInputsContext.Provider>
         </>
@@ -73,6 +57,32 @@ function AddInputBtn({ children }: { children?: React.ReactNode }) {
 
 MoreInputs.AddInputBtn = AddInputBtn
 
+interface InputAttributes {
+    type?: 'text' | 'password' | 'number' | 'email'
+    placeholder?: string
+}
+
+function Inputs({ type = 'text', placeholder }: InputAttributes) {
+    const [inputList, setInputList] = useState([] as React.ReactNode[])
+    const { inputs } = useContext(MoreInputsContext)
+    
+    /** Genera una lista con inputs */
+    const renderInputs = () => {
+        setInputList(
+            inputs.map(({ id }) =>
+                <Input key={id} id={id} type={type} placeholder={placeholder} />
+            )
+        )
+    }
+
+    useEffect(renderInputs, [inputs.length])
+    
+    return (<>{ inputList }</>)
+}
+
+MoreInputs.Inputs = Inputs
+
+
 function CustomInput<P>(Input: ComponentType<P>) {
     return (props: any) => <Input {...props} />
 }
@@ -80,11 +90,11 @@ function CustomInput<P>(Input: ComponentType<P>) {
 MoreInputs.CustomInput = CustomInput
 
 
-interface InputParams {
+interface InputParams extends InputAttributes {
     id: string
 }
 
-function Input({ id }: InputParams) {
+function Input({ id, type = 'text', placeholder }: InputParams) {
     const { inputs, setInputs } = useContext(MoreInputsContext)
 
     const getInputValue = (): string => {
@@ -109,7 +119,8 @@ function Input({ id }: InputParams) {
     return(
         <input 
             id={id} 
-            type="text" 
+            type={type}
+            placeholder={placeholder}
             value={getInputValue()} 
             onChange={e => handleChange(e.target.value)}
         />

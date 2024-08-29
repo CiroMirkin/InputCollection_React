@@ -19,6 +19,7 @@ function App() {
   return (
     <>
       <MoreInputs inputs={inputs} setInputs={setInputs}>
+        <MoreInputs.Inputs></MoreInputs.Inputs>
         <MoreInputs.AddInputBtn></MoreInputs.AddInputBtn>
       </MoreInputs>
     </>
