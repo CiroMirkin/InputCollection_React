@@ -59,17 +59,18 @@ MoreInputs.AddInputBtn = AddInputBtn
 interface InputAttributes {
     type?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'hidden' | 'url'
     placeholder?: string
+    className?: string
 }
 
-function Inputs({ type = 'text', placeholder }: InputAttributes) {
+function Inputs(props: InputAttributes) {
     const [inputList, setInputList] = useState([] as React.ReactNode[])
     const { inputs } = useContext(MoreInputsContext)
-    
+    console.table(props)
     /** Genera una lista con inputs */
     const renderInputs = () => {
         setInputList(
             inputs.map(({ id }) =>
-                <Input key={id} id={id} type={type} placeholder={placeholder} />
+                <Input key={id} id={id} {...props} />
             )
         )
     }
@@ -91,7 +92,7 @@ interface InputParams extends InputAttributes {
     id: string
 }
 
-function Input({ id, type = 'text', placeholder }: InputParams) {
+function Input({ id, type = 'text', placeholder, className }: InputParams) {
     const { inputs, setInputs } = useContext(MoreInputsContext)
 
     const getInputValue = (): string => {
@@ -112,6 +113,7 @@ function Input({ id, type = 'text', placeholder }: InputParams) {
             id={id} 
             type={type}
             placeholder={placeholder}
+            className={className}
             value={getInputValue()} 
             onChange={e => handleChange(e.target.value)}
         />
