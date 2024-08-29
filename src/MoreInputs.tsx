@@ -98,19 +98,13 @@ function Input({ id, type = 'text', placeholder }: InputParams) {
         return inputs.filter(inputData => inputData.id === id)[0].content
     }
 
-    const handleChange = (inputValue: string) => {
-        const newIns = inputs.map(inputData => {
-            if(inputData.id === id) {
-                return {
-                    ...inputData,
-                    content: inputValue
-                }
-            }
-            return {...inputData}
+    /** @param content Es el contenido del input */
+    const handleChange = (content: string) => {
+        const newInputs = inputs.map(inputData => {
+            return inputData.id === id ? {...inputData, content} : {...inputData}
         })
 
-        console.table(newIns)
-        setInputs(newIns)
+        setInputs(newInputs)
     }
 
     return(
