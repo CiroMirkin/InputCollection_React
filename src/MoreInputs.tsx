@@ -1,47 +1,52 @@
 import React, { ComponentType, createContext, useContext, useEffect, useState } from "react"
 
+/*
+Otros nombres que se consideraron fueron aparte de InputCollection (Colección De Inputs) fueron: 
+ExpandableInputList (Lista De Inputs Expandible) y InputStack (Pila De Inputs)
+*/
+
 export interface InputData {
     id: string
     value: string
 }
 
-interface MoreInputsContextObj { 
+interface InputCollectionContextObj { 
     addInput: () => void, 
     inputs: InputData[], 
     setInputs: React.Dispatch<React.SetStateAction<InputData[]>>
 }
 
-const MoreInputsContextDefault: MoreInputsContextObj = { 
+const InputCollectionContextDefault: InputCollectionContextObj = { 
     addInput: () => {}, 
     inputs: [], 
     setInputs: () => {} 
 }
 
-const MoreInputsContext = createContext(MoreInputsContextDefault)
+const InputCollectionContext = createContext(InputCollectionContextDefault)
 
-interface MoreInputsParams {
+interface InputCollectionParams {
     inputs: InputData[]
     setInputs: React.Dispatch<React.SetStateAction<InputData[]>>
     children: React.ReactNode
 }
 
 /** Lista de inputs agrandable. */
-function MoreInputs({ children, inputs, setInputs }: MoreInputsParams) {
+function InputCollection({ children, inputs, setInputs }: InputCollectionParams) {
     return (
         <>
-            <MoreInputsContext.Provider value={{ setInputs, inputs }} >
+            <InputCollectionContext.Provider value={{ setInputs, inputs }} >
                 { children }
-            </MoreInputsContext.Provider>
+            </InputCollectionContext.Provider>
         </>
     )
 }
 
-export default MoreInputs
+export default InputCollection
 
 /** Permite agregar un nuevo input vacio al final de la lista de inputs. */
 function AddInputBtn({ children }: { children?: React.ReactNode }) { 
     const btn = !!children ? children : <button>add</button>
-    const { inputs, setInputs } = useContext(MoreInputsContext)
+    const { inputs, setInputs } = useContext(InputCollectionContext)
 
     const addInput = () => {
         const newInput: InputData = {
@@ -57,7 +62,7 @@ function AddInputBtn({ children }: { children?: React.ReactNode }) {
     )
 }
 
-MoreInputs.AddInputBtn = AddInputBtn
+InputCollection.AddInputBtn = AddInputBtn
 
 // Inputs
 
@@ -69,7 +74,7 @@ interface InputAttributes {
 
 function InputList(props: InputAttributes) {
     const [inputList, setInputList] = useState([] as React.ReactNode[])
-    const { inputs } = useContext(MoreInputsContext)
+    const { inputs } = useContext(InputCollectionContext)
     
     /** Genera una lista con inputs */
     const renderInputs = () => {
@@ -85,20 +90,20 @@ function InputList(props: InputAttributes) {
     return (<>{ inputList }</>)
 }
 
-MoreInputs.InputList = InputList
+InputCollection.InputList = InputList
 
 function CustomInput<P>(Input: ComponentType<P>) {
     return (props: any) => <Input {...props} />
 }
 
-MoreInputs.CustomInput = CustomInput
+InputCollection.CustomInput = CustomInput
 
 interface InputParams extends InputAttributes {
     id: string
 }
 
 function Input({ id, type = 'text', placeholder, className }: InputParams) {
-    const { inputs, setInputs } = useContext(MoreInputsContext)
+    const { inputs, setInputs } = useContext(InputCollectionContext)
 
     const getInputValue = (): string => {
         return inputs.filter(inputData => inputData.id === id)[0].value

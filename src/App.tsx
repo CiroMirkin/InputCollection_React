@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import MoreInputs from './MoreInputs'
+import InputCollection from './MoreInputs'
 
 const testInputData = [
   {
@@ -18,10 +18,10 @@ function App() {
   const [ inputs, setInputs ] = useState([...testInputData])
   return (
     <>
-      <MoreInputs inputs={inputs} setInputs={setInputs}>
-        <MoreInputs.InputList></MoreInputs.InputList>
-        <MoreInputs.AddInputBtn></MoreInputs.AddInputBtn>
-      </MoreInputs>
+      <InputCollection inputs={inputs} setInputs={setInputs}>
+        <InputCollection.InputList />
+        <InputCollection.AddInputBtn></InputCollection.AddInputBtn>
+      </InputCollection>
     </>
   )
 }
