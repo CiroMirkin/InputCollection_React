@@ -10,11 +10,13 @@ export interface InputData {
     value: string
 }
 
+export type InputList = InputData[]
+
 // Contexto
 
 interface InputCollectionContextObj { 
     addInput: () => void, 
-    inputs: InputData[], 
+    inputs: InputList, 
     setInputs: React.Dispatch<React.SetStateAction<InputData[]>>
 }
 
@@ -29,7 +31,7 @@ const InputCollectionContext = createContext(InputCollectionContextDefault)
 // Componente principal (InputCollection)
 
 interface InputCollectionParams {
-    inputs: InputData[]
+    inputs: InputList
     setInputs: React.Dispatch<React.SetStateAction<InputData[]>>
     children: React.ReactNode
 }
