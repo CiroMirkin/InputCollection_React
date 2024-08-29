@@ -10,6 +10,8 @@ export interface InputData {
     value: string
 }
 
+// Contexto
+
 interface InputCollectionContextObj { 
     addInput: () => void, 
     inputs: InputData[], 
@@ -23,6 +25,8 @@ const InputCollectionContextDefault: InputCollectionContextObj = {
 }
 
 const InputCollectionContext = createContext(InputCollectionContextDefault)
+
+// Componente principal (InputCollection)
 
 interface InputCollectionParams {
     inputs: InputData[]
