@@ -92,12 +92,6 @@ function InputList(props: InputAttributes) {
 
 InputCollection.InputList = InputList
 
-function CustomInput<P>(Input: ComponentType<P>) {
-    return (props: any) => <Input {...props} />
-}
-
-InputCollection.CustomInput = CustomInput
-
 interface InputParams extends InputAttributes {
     id: string
 }
