@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import InputCollection from './MoreInputs'
+import InputCollection from './InputCollection'
 
 const testInputData = [
   {
