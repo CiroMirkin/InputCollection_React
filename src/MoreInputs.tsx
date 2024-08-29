@@ -66,7 +66,7 @@ interface InputAttributes {
 function Inputs(props: InputAttributes) {
     const [inputList, setInputList] = useState([] as React.ReactNode[])
     const { inputs } = useContext(MoreInputsContext)
-    console.table(props)
+    
     /** Genera una lista con inputs */
     const renderInputs = () => {
         setInputList(
