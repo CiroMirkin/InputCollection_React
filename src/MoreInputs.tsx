@@ -26,18 +26,9 @@ interface MoreInputsParams {
 }
 
 function MoreInputs({ children, inputs, setInputs }: MoreInputsParams) {
-    const addInput = () => {
-        const newInput: InputData = {
-            id: crypto.randomUUID(),
-            value: ''
-        }
-        const newInputsData = [...inputs, {...newInput}]
-        setInputs(newInputsData)
-    }
-
     return (
         <>
-            <MoreInputsContext.Provider value={{ addInput, setInputs, inputs }} >
+            <MoreInputsContext.Provider value={{ setInputs, inputs }} >
                 { children }
             </MoreInputsContext.Provider>
         </>
@@ -48,7 +39,17 @@ export default MoreInputs
 
 function AddInputBtn({ children }: { children?: React.ReactNode }) { 
     const btn = !!children ? children : <button>add</button>
-    const addInput = useContext(MoreInputsContext).addInput
+    const { inputs, setInputs } = useContext(MoreInputsContext)
+
+    const addInput = () => {
+        const newInput: InputData = {
+            id: crypto.randomUUID(),
+            value: ''
+        }
+        const newInputsData = [...inputs, {...newInput}]
+        setInputs(newInputsData)
+    }
+    
     return (
         <span onClick={addInput}>{ btn }</span>
     )
