@@ -25,6 +25,7 @@ interface MoreInputsParams {
     children: React.ReactNode
 }
 
+/** Lista de inputs agrandable. */
 function MoreInputs({ children, inputs, setInputs }: MoreInputsParams) {
     return (
         <>
@@ -37,6 +38,7 @@ function MoreInputs({ children, inputs, setInputs }: MoreInputsParams) {
 
 export default MoreInputs
 
+/** Permite agregar un nuevo input vacio al final de la lista de inputs. */
 function AddInputBtn({ children }: { children?: React.ReactNode }) { 
     const btn = !!children ? children : <button>add</button>
     const { inputs, setInputs } = useContext(MoreInputsContext)
@@ -56,6 +58,8 @@ function AddInputBtn({ children }: { children?: React.ReactNode }) {
 }
 
 MoreInputs.AddInputBtn = AddInputBtn
+
+// Inputs
 
 interface InputAttributes {
     type?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'hidden' | 'url'
