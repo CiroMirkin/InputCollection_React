@@ -5,11 +5,11 @@ import MoreInputs from './MoreInputs'
 const testInputData = [
   {
     id: '1',
-    content: 'pipi'
+    value: 'pipi'
   },
   {
     id: '2',
-    content: 'pupu'
+    value: 'pupu'
   }
 ]
 

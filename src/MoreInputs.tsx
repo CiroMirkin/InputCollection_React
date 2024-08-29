@@ -2,7 +2,7 @@ import React, { ComponentType, createContext, useContext, useEffect, useState } 
 
 export interface InputData {
     id: string
-    content: string
+    value: string
 }
 
 interface MoreInputsContextObj { 
@@ -29,7 +29,7 @@ function MoreInputs({ children, inputs, setInputs }: MoreInputsParams) {
     const addInput = () => {
         const newInput: InputData = {
             id: crypto.randomUUID(),
-            content: ''
+            value: ''
         }
         const newInputsData = [...inputs, {...newInput}]
         setInputs(newInputsData)
@@ -95,13 +95,13 @@ function Input({ id, type = 'text', placeholder }: InputParams) {
     const { inputs, setInputs } = useContext(MoreInputsContext)
 
     const getInputValue = (): string => {
-        return inputs.filter(inputData => inputData.id === id)[0].content
+        return inputs.filter(inputData => inputData.id === id)[0].value
     }
 
-    /** @param content Es el contenido del input */
-    const handleChange = (content: string) => {
+    /** @param value Es el contenido del input */
+    const handleChange = (value: string) => {
         const newInputs = inputs.map(inputData => {
-            return inputData.id === id ? {...inputData, content} : {...inputData}
+            return inputData.id === id ? {...inputData, value} : {...inputData}
         })
 
         setInputs(newInputs)
