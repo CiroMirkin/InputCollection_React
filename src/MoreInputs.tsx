@@ -57,7 +57,7 @@ function AddInputBtn({ children }: { children?: React.ReactNode }) {
 MoreInputs.AddInputBtn = AddInputBtn
 
 interface InputAttributes {
-    type?: 'text' | 'password' | 'number' | 'email'
+    type?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'hidden' | 'url'
     placeholder?: string
 }
 
