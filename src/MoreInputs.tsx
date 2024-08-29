@@ -23,7 +23,6 @@ interface MoreInputsParams {
     inputs: InputData[]
     setInputs: React.Dispatch<React.SetStateAction<InputData[]>>
     children: React.ReactNode
-    type?: 'text' | 'password' | 'number'
 }
 
 function MoreInputs({ children, inputs, setInputs }: MoreInputsParams) {
@@ -82,13 +81,11 @@ function Inputs({ type = 'text', placeholder }: InputAttributes) {
 
 MoreInputs.Inputs = Inputs
 
-
 function CustomInput<P>(Input: ComponentType<P>) {
     return (props: any) => <Input {...props} />
 }
 
 MoreInputs.CustomInput = CustomInput
-
 
 interface InputParams extends InputAttributes {
     id: string
