@@ -67,7 +67,7 @@ interface InputAttributes {
     className?: string
 }
 
-function Inputs(props: InputAttributes) {
+function InputList(props: InputAttributes) {
     const [inputList, setInputList] = useState([] as React.ReactNode[])
     const { inputs } = useContext(MoreInputsContext)
     
@@ -85,7 +85,7 @@ function Inputs(props: InputAttributes) {
     return (<>{ inputList }</>)
 }
 
-MoreInputs.Inputs = Inputs
+MoreInputs.InputList = InputList
 
 function CustomInput<P>(Input: ComponentType<P>) {
     return (props: any) => <Input {...props} />
