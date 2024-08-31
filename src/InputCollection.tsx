@@ -1,4 +1,4 @@
-import React, { ComponentType, createContext, useContext, useEffect, useState } from "react"
+import React, { createContext, useContext, useEffect, useState } from "react"
 
 /*
 Otros nombres que se consideraron fueron aparte de InputCollection (Colección De Inputs) fueron: 
@@ -15,13 +15,11 @@ export type InputList = InputData[]
 // Contexto
 
 interface InputCollectionContextObj { 
-    addInput: () => void, 
     inputs: InputList, 
     setInputs: React.Dispatch<React.SetStateAction<InputData[]>>
 }
 
 const InputCollectionContextDefault: InputCollectionContextObj = { 
-    addInput: () => {}, 
     inputs: [], 
     setInputs: () => {} 
 }
