@@ -48,8 +48,8 @@ function InputCollection({ children, inputs, setInputs }: InputCollectionParams)
 export default InputCollection
 
 /** Permite agregar un nuevo input vacio al final de la lista de inputs. */
-function AddInputBtn({ children }: { children?: React.ReactNode }) { 
-    const btn = !!children ? children : <button>add</button>
+function AddInputBtn({ children, className }: { children?: React.ReactNode, className?: string }) { 
+    const buttonText = !!children ? children : 'add'
     const { inputs, setInputs } = useContext(InputCollectionContext)
 
     const addInput = () => {
@@ -62,7 +62,7 @@ function AddInputBtn({ children }: { children?: React.ReactNode }) {
     }
     
     return (
-        <span onClick={addInput}>{ btn }</span>
+        <button onClick={addInput} className={className}>{ buttonText }</button>
     )
 }
 
