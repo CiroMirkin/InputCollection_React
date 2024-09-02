@@ -84,7 +84,10 @@ function InputList(props: InputAttributes) {
     const renderInputs = () => {
         setInputList(
             inputs.map(({ id }) =>
-                <Input key={id} id={id} {...props} />
+                <div key={id}>
+                    <Input id={id} {...props} />
+                    <DeleteInputBtn inputId={id} />
+                </div>
             )
         )
     }
@@ -104,7 +107,9 @@ function Input({ id, type = 'text', placeholder, className }: InputParams) {
     const { inputs, setInputs } = useContext(InputCollectionContext)
 
     const getInputValue = (): string => {
-        return inputs.filter(inputData => inputData.id === id)[0].value
+        const input = inputs.filter(inputData => inputData.id === id)[0]
+        const doesInputExist = !!input
+        return doesInputExist ? input.value : ''
     }
 
     /** @param value Es el contenido del input */
@@ -125,5 +130,22 @@ function Input({ id, type = 'text', placeholder, className }: InputParams) {
             value={getInputValue()} 
             onChange={e => handleChange(e.target.value)}
         />
+    )
+}
+
+interface DeleteInputBtnParams {
+    inputId: string
+}
+
+function DeleteInputBtn({ inputId }: DeleteInputBtnParams) {
+    const { inputs, setInputs } = useContext(InputCollectionContext)
+
+    const handleClick = () => {
+        const newInputs = [...inputs].filter(input => input.id !== inputId)
+        setInputs(newInputs)
+    }
+
+    return (
+        <button onClick={handleClick}>Eliminar</button>
     )
 }
