@@ -74,19 +74,24 @@ interface InputAttributes {
     type?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'hidden' | 'url'
     placeholder?: string
     className?: string
+    deleteInputBtnClassName?: string
 }
 
 function InputList(props: InputAttributes) {
     const [inputList, setInputList] = useState([] as React.ReactNode[])
     const { inputs } = useContext(InputCollectionContext)
     
+    const InputAttributes = props
+    const deleteInputBtnClassName = props.deleteInputBtnClassName
+    delete InputAttributes.deleteInputBtnClassName
+
     /** Genera una lista con inputs */
     const renderInputs = () => {
         setInputList(
             inputs.map(({ id }) =>
                 <div key={id}>
-                    <Input id={id} {...props} />
-                    <DeleteInputBtn inputId={id} />
+                    <Input id={id} {...InputAttributes} />
+                    <DeleteInputBtn inputId={id} className={deleteInputBtnClassName} />
                 </div>
             )
         )
@@ -135,9 +140,10 @@ function Input({ id, type = 'text', placeholder, className }: InputParams) {
 
 interface DeleteInputBtnParams {
     inputId: string
+    className: string
 }
 
-function DeleteInputBtn({ inputId }: DeleteInputBtnParams) {
+function DeleteInputBtn({ inputId, className }: DeleteInputBtnParams) {
     const { inputs, setInputs } = useContext(InputCollectionContext)
 
     const handleClick = () => {
@@ -146,6 +152,6 @@ function DeleteInputBtn({ inputId }: DeleteInputBtnParams) {
     }
 
     return (
-        <button onClick={handleClick}>Eliminar</button>
+        <button onClick={handleClick} className={className}>Eliminar</button>
     )
 }
