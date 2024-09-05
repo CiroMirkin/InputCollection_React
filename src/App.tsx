@@ -18,9 +18,14 @@ function App() {
   const [ inputs, setInputs ] = useState([...testInputData])
   return (
     <>
-      <InputCollection inputs={inputs} setInputs={setInputs}>
-        <InputCollection.InputList />
-        <InputCollection.AddInputBtn></InputCollection.AddInputBtn>
+      <InputCollection inputs={inputs} setInputs={setInputs} className='container'>
+        <InputCollection.InputList 
+          className='input'
+          deleteInputBtnClassName='btn'
+        />
+        <InputCollection.AddInputBtn
+          className='btn'
+        ></InputCollection.AddInputBtn>
       </InputCollection>
     </>
   )
