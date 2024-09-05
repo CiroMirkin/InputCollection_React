@@ -74,16 +74,22 @@ interface InputAttributes {
     type?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'hidden' | 'url'
     placeholder?: string
     className?: string
+}
+
+interface InputListParams extends InputAttributes {
     deleteInputBtnClassName?: string
 }
 
-function InputList(props: InputAttributes) {
+function InputList(props: InputListParams) {
     const [inputList, setInputList] = useState([] as React.ReactNode[])
     const { inputs } = useContext(InputCollectionContext)
     
-    const InputAttributes = props
-    const deleteInputBtnClassName = props.deleteInputBtnClassName
-    delete InputAttributes.deleteInputBtnClassName
+    const InputAttributes: InputAttributes = { 
+        type: props.type, 
+        placeholder: props.placeholder,
+        className: props.className
+    }
+    const deleteInputBtnClassName = props.deleteInputBtnClassName || ""
 
     /** Genera una lista con inputs */
     const renderInputs = () => {
