@@ -35,3 +35,13 @@ body {
 .btn:hover {
   border-color: #646cff;
 }
+
+.input {
+  padding: 0.5em 0.6em;
+  margin-right: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+}
