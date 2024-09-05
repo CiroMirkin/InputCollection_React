@@ -32,16 +32,17 @@ interface InputCollectionParams {
     inputs: InputList
     setInputs: React.Dispatch<React.SetStateAction<InputData[]>>
     children: React.ReactNode
+    className?: string
 }
 
 /** Lista de inputs agrandable. */
-function InputCollection({ children, inputs, setInputs }: InputCollectionParams) {
+function InputCollection({ children, inputs, setInputs, className }: InputCollectionParams) {
     return (
-        <>
+        <div className={className}>
             <InputCollectionContext.Provider value={{ setInputs, inputs }} >
                 { children }
             </InputCollectionContext.Provider>
-        </>
+        </div>
     )
 }
 
