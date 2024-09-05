@@ -21,6 +21,12 @@ body {
   min-height: 100vh;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
 .btn {
   border-radius: 8px;
   border: 1px solid transparent;
