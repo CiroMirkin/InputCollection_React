@@ -8,14 +8,13 @@ import './App.css'
 import InputCollection, { InputList } from './InputCollection'
 
 function App() {
-    const [ inputs, setInputs ] = useState([] as InputList)
+    const [ names, setNames ] = useState([] as InputList)
+
     return (
-        <>
-            <InputCollection inputs={inputs} setInputs={setInputs} className='container'>
-                <InputCollection.InputList className='input' deleteInputBtnClassName='btn'/>
-                <InputCollection.AddInputBtn className='btn'></InputCollection.AddInputBtn>
-            </InputCollection>
-        </>
+        <InputCollection inputs={names} setInputs={setNames} className='container'>
+            <InputCollection.InputList className='input' deleteInputBtnClassName='btn'/>
+            <InputCollection.AddInputBtn className='btn'></InputCollection.AddInputBtn>
+        </InputCollection>
     )
 }
 ```
