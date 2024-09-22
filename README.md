@@ -23,19 +23,19 @@ You can copy and paste the [InputCollection.tsx](./src/InputCollection.tsx) file
 
 ## Running The Project Locally
 
-### Clone The Project
+Clone The Project:
 
 ```
 git clone git@github.com:CiroMirkin/InputCollection_React.git
 ```
 
-### Install Dependencies
+Install Dependencies:
 
 ```
 npm i
 ```
 
-### Start The Development Server
+Start The Development Server:
 
 ```
 npm run dev
