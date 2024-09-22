@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
 
 /*
-Otros nombres que se consideraron fueron aparte de InputCollection (Colección De Inputs) fueron: 
-ExpandableInputList (Lista De Inputs Expandible) y InputStack (Pila De Inputs)
+Other names that were considered in addition to InputCollection were: 
+ExpandableInputList and InputStack.
 */
 
 export interface InputData {
@@ -12,7 +12,7 @@ export interface InputData {
 
 export type InputList = InputData[]
 
-// Contexto
+// Context
 
 interface InputCollectionContextObj { 
     inputs: InputList, 
@@ -26,7 +26,7 @@ const InputCollectionContextDefault: InputCollectionContextObj = {
 
 const InputCollectionContext = createContext(InputCollectionContextDefault)
 
-// Componente principal (InputCollection)
+// Container component (InputCollection)
 
 interface InputCollectionParams {
     inputs: InputList
@@ -35,7 +35,7 @@ interface InputCollectionParams {
     className?: string
 }
 
-/** Lista de inputs agrandable. */
+/** Expandable input list. */
 function InputCollection({ children, inputs, setInputs, className }: InputCollectionParams) {
     return (
         <div className={className}>
@@ -48,7 +48,7 @@ function InputCollection({ children, inputs, setInputs, className }: InputCollec
 
 export default InputCollection
 
-/** Permite agregar un nuevo input vacio al final de la lista de inputs. */
+/** Allows to add a new empty input at the end of the input list. */
 function AddInputBtn({ children, className }: { children?: React.ReactNode, className?: string }) { 
     const buttonText = !!children ? children : 'add'
     const { inputs, setInputs } = useContext(InputCollectionContext)
@@ -92,7 +92,7 @@ function InputList(props: InputListParams) {
     }
     const deleteInputBtnClassName = props.deleteInputBtnClassName || ""
 
-    /** Genera una lista con inputs */
+    /** Generate a list with inputs */
     const renderInputs = () => {
         setInputList(
             inputs.map(({ id }) =>
@@ -124,8 +124,8 @@ function Input({ id, type = 'text', placeholder, className }: InputParams) {
         return doesInputExist ? input.value : ''
     }
 
-    /** @param value Es el contenido del input */
     const handleChange = (value: string) => {
+        // Search for the right input and update its value.
         const newInputs = inputs.map(inputData => {
             return inputData.id === id ? {...inputData, value} : {...inputData}
         })
