@@ -19,6 +19,8 @@ function App() {
 }
 ```
 
+You can copy and paste the [InputCollection.tsx](./src/InputCollection.tsx) file into your project. 
+
 ## Running The Project Locally
 
 ### Clone The Project
