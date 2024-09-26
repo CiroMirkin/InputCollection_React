@@ -19,6 +19,30 @@ function App() {
 }
 ```
 
+Component without optional attributes:
+
+```tsx
+function App() {
+    const [ inputs, setInputs ] = useState([
+    {
+        id: '1',
+        value: 'Lorem 1'
+    },
+    {
+        id: '2',
+        value: 'Lorem 2'
+    }
+    ] as InputList)
+
+    return (
+        <InputCollection inputs={inputs} setInputs={setInputs}>
+            <InputCollection.InputList />
+            <InputCollection.AddInputBtn />
+        </InputCollection>
+    )
+}
+```
+
 You can copy and paste the [InputCollection.tsx](./src/InputCollection.tsx) file into your project. 
 
 ## Running The Project Locally
