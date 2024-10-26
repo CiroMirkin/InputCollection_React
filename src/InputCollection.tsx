@@ -12,16 +12,34 @@ export interface InputData {
 
 export type InputList = InputData[]
 
+// Config object
+
+interface InputCollectionConfig {
+    textOfDeleteInputBtn?: string
+    textOfAddInputBtn?: string
+    classOfDeleteInputBtn?: string
+    classOfAddInputBtn?: string
+    inputsClassName?: string
+    inputsPlaceholder?: string
+}
+
+const defaultConfig: InputCollectionConfig = Object.freeze({
+    textOfDeleteInputBtn: 'Delete',
+    textOfAddInputBtn: 'Add',
+})
+
 // Context
 
 interface InputCollectionContextObj { 
     inputs: InputList, 
     setInputs: React.Dispatch<React.SetStateAction<InputData[]>>
+    config: InputCollectionConfig
 }
 
 const InputCollectionContextDefault: InputCollectionContextObj = { 
     inputs: [], 
-    setInputs: () => {} 
+    setInputs: () => {},
+    config: defaultConfig,
 }
 
 const InputCollectionContext = createContext(InputCollectionContextDefault)
@@ -33,10 +51,11 @@ interface InputCollectionParams {
     setInputs?: React.Dispatch<React.SetStateAction<InputData[]>>
     children: React.ReactNode
     className?: string
+    config?: InputCollectionConfig
 }
 
 /** Expandable input list. */
-function InputCollection({ children, inputs, setInputs, className }: InputCollectionParams) {
+function InputCollection({ children, inputs, setInputs, className, config }: InputCollectionParams) {
     // This state is used if we don´t receive an external state
     const [ ownInputs, setOwnInputs ] = useState(inputs)
     return (
@@ -44,7 +63,8 @@ function InputCollection({ children, inputs, setInputs, className }: InputCollec
             <InputCollectionContext.Provider 
                 value={{ 
                     setInputs: !setInputs ? setOwnInputs : setInputs, 
-                    inputs: !setInputs ? ownInputs : inputs 
+                    inputs: !setInputs ? ownInputs : inputs,
+                    config: config || defaultConfig,
                 }} 
             >
                 { children }
