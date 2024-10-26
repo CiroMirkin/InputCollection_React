@@ -30,16 +30,23 @@ const InputCollectionContext = createContext(InputCollectionContextDefault)
 
 interface InputCollectionParams {
     inputs: InputList
-    setInputs: React.Dispatch<React.SetStateAction<InputData[]>>
+    setInputs?: React.Dispatch<React.SetStateAction<InputData[]>>
     children: React.ReactNode
     className?: string
 }
 
 /** Expandable input list. */
 function InputCollection({ children, inputs, setInputs, className }: InputCollectionParams) {
+    // This state is used if we don´t receive an external state
+    const [ ownInputs, setOwnInputs ] = useState(inputs)
     return (
         <div className={className}>
-            <InputCollectionContext.Provider value={{ setInputs, inputs }} >
+            <InputCollectionContext.Provider 
+                value={{ 
+                    setInputs: !setInputs ? setOwnInputs : setInputs, 
+                    inputs: !setInputs ? ownInputs : inputs 
+                }} 
+            >
                 { children }
             </InputCollectionContext.Provider>
         </div>
