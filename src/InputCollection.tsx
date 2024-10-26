@@ -118,7 +118,6 @@ function InputList(props: InputListParams) {
         placeholder: props.placeholder,
         className: props.className
     }
-    const deleteInputBtnClassName = props.deleteInputBtnClassName || ""
 
     /** Generate a list with inputs */
     const renderInputs = () => {
@@ -126,7 +125,7 @@ function InputList(props: InputListParams) {
             inputs.map(({ id }) =>
                 <div key={id}>
                     <Input id={id} {...InputAttributes} />
-                    <DeleteInputBtn inputId={id} className={deleteInputBtnClassName} />
+                    <DeleteInputBtn inputId={id} />
                 </div>
             )
         )
@@ -175,7 +174,6 @@ function Input({ id, type = 'text', placeholder, className }: InputParams) {
 
 interface DeleteInputBtnParams {
     inputId: string
-    className: string
 }
 
 function DeleteInputBtn({ inputId }: DeleteInputBtnParams) {
