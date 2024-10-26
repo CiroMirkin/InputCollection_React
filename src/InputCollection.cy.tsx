@@ -29,7 +29,7 @@ describe('Add inputs.', () => {
   })
 })
 describe('Delete the input.', () => {
-    it('mounts', () => {
+    it('', () => {
         const inputs = [
             {
                 id: '1',
@@ -48,7 +48,7 @@ describe('Delete the input.', () => {
 })
 
 describe('Use config object.', () => {
-    it('mounts', () => {
+    it('', () => {
         const inputs = [
             {
                 id: '1',
