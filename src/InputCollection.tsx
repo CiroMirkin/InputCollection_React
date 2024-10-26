@@ -76,8 +76,9 @@ function InputCollection({ children, inputs, setInputs, className, config }: Inp
 export default InputCollection
 
 /** Allows to add a new empty input at the end of the input list. */
-function AddInputBtn({ children, className }: { children?: React.ReactNode, className?: string }) { 
-    const buttonText = !!children ? children : 'add'
+function AddInputBtn({ }: { }) { 
+    const buttonText = useContext(InputCollectionContext).config.textOfAddInputBtn
+    const className = useContext(InputCollectionContext).config.classOfAddInputBtn
     const { inputs, setInputs } = useContext(InputCollectionContext)
 
     const addInput = () => {
@@ -177,8 +178,9 @@ interface DeleteInputBtnParams {
     className: string
 }
 
-function DeleteInputBtn({ inputId, className }: DeleteInputBtnParams) {
+function DeleteInputBtn({ inputId }: DeleteInputBtnParams) {
     const { inputs, setInputs } = useContext(InputCollectionContext)
+    const { classOfDeleteInputBtn, textOfDeleteInputBtn } = useContext(InputCollectionContext).config
 
     const handleClick = () => {
         const newInputs = [...inputs].filter(input => input.id !== inputId)
@@ -186,6 +188,6 @@ function DeleteInputBtn({ inputId, className }: DeleteInputBtnParams) {
     }
 
     return (
-        <button onClick={handleClick} className={className}>Eliminar</button>
+        <button onClick={handleClick} className={classOfDeleteInputBtn}>{ textOfDeleteInputBtn }</button>
     )
 }
