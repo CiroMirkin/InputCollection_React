@@ -96,7 +96,7 @@ function AddInputBtn({ }: { }) {
     }
     
     return (
-        <button onClick={addInput} id="add-input-btn" className={className}>{ buttonText }</button>
+        <button onClick={addInput} type-btn="add-input-btn" className={className}>{ buttonText }</button>
     )
 }
 
@@ -178,6 +178,6 @@ function DeleteInputBtn({ inputId }: DeleteInputBtnParams) {
     }
 
     return (
-        <button onClick={handleClick} id="delete-input-btn" className={classOfDeleteInputBtn}>{ textOfDeleteInputBtn }</button>
+        <button onClick={handleClick} type-btn="delete-input-btn" className={classOfDeleteInputBtn}>{ textOfDeleteInputBtn }</button>
     )
 }
