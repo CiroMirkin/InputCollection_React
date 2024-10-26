@@ -21,11 +21,15 @@ interface InputCollectionConfig {
     classOfAddInputBtn?: string
     inputsClassName?: string
     inputsPlaceholder?: string
+    inputsType?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'hidden' | 'url'
 }
 
 const defaultConfig: InputCollectionConfig = Object.freeze({
     textOfDeleteInputBtn: 'Delete',
     textOfAddInputBtn: 'Add',
+    inputsType: 'text',
+    inputsPlaceholder: '',
+    inputsClassName: '',
 })
 
 // Context
@@ -99,32 +103,16 @@ InputCollection.AddInputBtn = AddInputBtn
 
 // Inputs
 
-interface InputAttributes {
-    type?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'hidden' | 'url'
-    placeholder?: string
-    className?: string
-}
-
-interface InputListParams extends InputAttributes {
-    deleteInputBtnClassName?: string
-}
-
-function InputList(props: InputListParams) {
+function InputList() {
     const [inputList, setInputList] = useState([] as React.ReactNode[])
     const { inputs } = useContext(InputCollectionContext)
-    
-    const InputAttributes: InputAttributes = { 
-        type: props.type, 
-        placeholder: props.placeholder,
-        className: props.className
-    }
 
     /** Generate a list with inputs */
     const renderInputs = () => {
         setInputList(
             inputs.map(({ id }) =>
                 <div key={id}>
-                    <Input id={id} {...InputAttributes} />
+                    <Input id={id} />
                     <DeleteInputBtn inputId={id} />
                 </div>
             )
@@ -138,12 +126,15 @@ function InputList(props: InputListParams) {
 
 InputCollection.InputList = InputList
 
-interface InputParams extends InputAttributes {
+interface InputParams {
     id: string
 }
 
-function Input({ id, type = 'text', placeholder, className }: InputParams) {
-    const { inputs, setInputs } = useContext(InputCollectionContext)
+function Input({ id }: InputParams) {
+    const { inputs, setInputs, config } = useContext(InputCollectionContext)
+    const type = config.inputsType
+    const placeholder = config.inputsPlaceholder
+    const className = config.inputsClassName
 
     const getInputValue = (): string => {
         const input = inputs.filter(inputData => inputData.id === id)[0]
