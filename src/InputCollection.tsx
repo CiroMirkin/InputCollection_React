@@ -14,7 +14,7 @@ export type InputList = InputData[]
 
 // Config object
 
-interface InputCollectionConfig {
+export interface InputCollectionConfig {
     textOfDeleteInputBtn?: string
     textOfAddInputBtn?: string
     classOfDeleteInputBtn?: string
@@ -22,6 +22,7 @@ interface InputCollectionConfig {
     inputsClassName?: string
     inputsPlaceholder?: string
     inputsType?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'hidden' | 'url'
+
 }
 
 const defaultConfig: InputCollectionConfig = Object.freeze({
@@ -68,7 +69,7 @@ function InputCollection({ children, inputs, setInputs, className, config }: Inp
                 value={{ 
                     setInputs: !setInputs ? setOwnInputs : setInputs, 
                     inputs: !setInputs ? ownInputs : inputs,
-                    config: config || defaultConfig,
+                    config: (config ? config : defaultConfig),
                 }} 
             >
                 { children }
@@ -80,8 +81,8 @@ function InputCollection({ children, inputs, setInputs, className, config }: Inp
 export default InputCollection
 
 /** Allows to add a new empty input at the end of the input list. */
-const { inputs, setInputs, config } = useContext(InputCollectionContext)
 function AddInputBtn({ }: { }) { 
+    const { inputs, setInputs, config } = useContext(InputCollectionContext)
     const buttonText = config.textOfAddInputBtn
     const className = config.classOfAddInputBtn
 
