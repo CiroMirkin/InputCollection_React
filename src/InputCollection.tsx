@@ -112,7 +112,7 @@ function InputList() {
     const renderInputs = () => {
         setInputList(
             inputs.map(({ id }) =>
-                <div key={id}>
+                <div key={id} className="input-container">
                     <Input id={id} />
                     <DeleteInputBtn inputId={id} />
                 </div>
@@ -122,7 +122,7 @@ function InputList() {
 
     useEffect(renderInputs, [inputs.length])
     
-    return (<>{ inputList }</>)
+    return (<div id="input-list">{ inputList }</div >)
 }
 
 InputCollection.InputList = InputList

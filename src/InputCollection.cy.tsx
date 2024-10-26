@@ -9,6 +9,7 @@ describe('Add an input when the collection is empty.', () => {
             </InputCollection>
         )
         cy.get("[id=add-input-btn]").click()
+        cy.get("[id=input-list]").children().should('have.lengthOf', 1)
   })
 })
 
@@ -27,6 +28,7 @@ describe('Add a new input when an input already exist.', () => {
             </InputCollection>
         )
         cy.get("[id=add-input-btn]").click()
+        cy.get("[id=input-list]").children().should('have.lengthOf', 2)
   })
 })
 describe('Delete the input.', () => {
@@ -43,7 +45,8 @@ describe('Delete the input.', () => {
                 <InputCollection.AddInputBtn />
             </InputCollection>
         )
-        cy.get("[id=delete-input-btn]").click()
+        cy.get("[id=input-list]").children().first().children().last().click()
+        cy.get("[id=input-list]").should('be.empty')
   })
 })
 
@@ -52,7 +55,7 @@ describe('Use config object.', () => {
         const inputs = [
             {
                 id: '1',
-                value: 'pipi'
+                value: ''
             }
         ]
         const config: InputCollectionConfig = {
@@ -67,6 +70,7 @@ describe('Use config object.', () => {
                 <InputCollection.AddInputBtn />
             </InputCollection>
         )
-        cy.get("[id=add-input-btn]").click()
+        cy.get("[id=input-list]").children().first().children().last().contains('Eliminar')
+        cy.get("[id=add-input-btn]").contains('Agregar nombre')
   })
 })
