@@ -76,10 +76,10 @@ function InputCollection({ children, inputs, setInputs, className, config }: Inp
 export default InputCollection
 
 /** Allows to add a new empty input at the end of the input list. */
+const { inputs, setInputs, config } = useContext(InputCollectionContext)
 function AddInputBtn({ }: { }) { 
-    const buttonText = useContext(InputCollectionContext).config.textOfAddInputBtn
-    const className = useContext(InputCollectionContext).config.classOfAddInputBtn
-    const { inputs, setInputs } = useContext(InputCollectionContext)
+    const buttonText = config.textOfAddInputBtn
+    const className = config.classOfAddInputBtn
 
     const addInput = () => {
         const newInput: InputData = {
@@ -179,8 +179,8 @@ interface DeleteInputBtnParams {
 }
 
 function DeleteInputBtn({ inputId }: DeleteInputBtnParams) {
-    const { inputs, setInputs } = useContext(InputCollectionContext)
-    const { classOfDeleteInputBtn, textOfDeleteInputBtn } = useContext(InputCollectionContext).config
+    const { inputs, setInputs, config } = useContext(InputCollectionContext)
+    const { classOfDeleteInputBtn, textOfDeleteInputBtn } = config
 
     const handleClick = () => {
         const newInputs = [...inputs].filter(input => input.id !== inputId)
