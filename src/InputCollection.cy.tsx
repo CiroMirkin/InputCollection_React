@@ -1,7 +1,7 @@
 import InputCollection, { InputCollectionConfig } from './InputCollection'
 
-describe('Add an input when the collection is empty.', () => {
-    it('mounts', () => {
+describe('Add inputs.', () => {
+    it('Add an input when the collection is empty.', () => {
         cy.mount(
             <InputCollection inputs={[]} >
                 <InputCollection.InputList />
@@ -11,10 +11,7 @@ describe('Add an input when the collection is empty.', () => {
         cy.get("[type-btn=add-input-btn]").click()
         cy.get("[id=input-list]").children().should('have.lengthOf', 1)
   })
-})
-
-describe('Add a new input when an input already exist.', () => {
-    it('mounts', () => {
+    it('Add a new input when an input already exist.', () => {
         const inputs = [
             {
                 id: '1',
