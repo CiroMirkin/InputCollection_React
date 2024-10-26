@@ -64,3 +64,13 @@ Start The Development Server:
 ```
 npm run dev
 ```
+
+# Component Testing
+
+Run [Cypress](https://docs.cypress.io/app/component-testing/react/overview) with:
+
+```
+npx cypress run
+```
+
+Click on `Component Testing` and choose a browser.
