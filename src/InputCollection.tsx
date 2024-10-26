@@ -178,6 +178,6 @@ function DeleteInputBtn({ inputId }: DeleteInputBtnParams) {
     }
 
     return (
-        <button onClick={handleClick} className={classOfDeleteInputBtn}>{ textOfDeleteInputBtn }</button>
+        <button onClick={handleClick} id="delete-input-btn" className={classOfDeleteInputBtn}>{ textOfDeleteInputBtn }</button>
     )
 }

@@ -29,6 +29,23 @@ describe('Add a new input when an input already exist.', () => {
         cy.get("[id=add-input-btn]").click()
   })
 })
+describe('Delete the input.', () => {
+    it('mounts', () => {
+        const inputs = [
+            {
+                id: '1',
+                value: 'pedro'
+            }
+        ]
+        cy.mount(
+            <InputCollection inputs={inputs} >
+                <InputCollection.InputList />
+                <InputCollection.AddInputBtn />
+            </InputCollection>
+        )
+        cy.get("[id=delete-input-btn]").click()
+  })
+})
 
 describe('Use config object.', () => {
     it('mounts', () => {
