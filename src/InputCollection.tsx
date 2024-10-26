@@ -70,7 +70,7 @@ function AddInputBtn({ children, className }: { children?: React.ReactNode, clas
     }
     
     return (
-        <button onClick={addInput} className={className}>{ buttonText }</button>
+        <button onClick={addInput} id="add-input-btn" className={className}>{ buttonText }</button>
     )
 }
 
