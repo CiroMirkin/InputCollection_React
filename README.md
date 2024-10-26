@@ -10,10 +10,16 @@ import InputCollection, { InputList } from './InputCollection'
 function App() {
     const [ names, setNames ] = useState([] as InputList)
 
+    const config = {
+        textOfDeleteInputBtn: 'Delete',
+        textOfAddInputBtn: 'Add',
+        inputsPlaceholder: 'Write the name...',
+    }
+
     return (
-        <InputCollection inputs={names} setInputs={setNames} className='container'>
-            <InputCollection.InputList className='input' deleteInputBtnClassName='btn'/>
-            <InputCollection.AddInputBtn className='btn'></InputCollection.AddInputBtn>
+        <InputCollection inputs={names} setInputs={setNames} className='container' config={config}>
+            <InputCollection.InputList/>
+            <InputCollection.AddInputBtn />
         </InputCollection>
     )
 }
