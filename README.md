@@ -76,7 +76,7 @@ npm run dev
 Run [Cypress](https://docs.cypress.io/app/component-testing/react/overview) with:
 
 ```
-npx cypress run
+npx cypress open
 ```
 
 Click on `Component Testing` and choose a browser.
