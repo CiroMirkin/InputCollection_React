@@ -48,7 +48,7 @@ describe('Delete the input.', () => {
 })
 
 describe('Use config object.', () => {
-    it('', () => {
+    it('Text attributes work.', () => {
         const inputs = [
             {
                 id: '1',
@@ -71,7 +71,7 @@ describe('Use config object.', () => {
         cy.get("[type-btn=add-input-btn]").contains('Agregar nombre')
   })
 
-  it('', () => {
+  it('The user config and the default config are merged.', () => {
     const inputs = [
         {
             id: '1',
