@@ -70,4 +70,25 @@ describe('Use config object.', () => {
         cy.get("[id=input-list]").children().first().children().last().contains('Eliminar')
         cy.get("[type-btn=add-input-btn]").contains('Agregar nombre')
   })
+
+  it('', () => {
+    const inputs = [
+        {
+            id: '1',
+            value: ''
+        }
+    ]
+    const config: InputCollectionConfig = {
+        textOfDeleteInputBtn: 'Eliminar',
+    }
+
+    cy.mount(
+        <InputCollection inputs={inputs} config={config} >
+            <InputCollection.InputList />
+            <InputCollection.AddInputBtn />
+        </InputCollection>
+    )
+    cy.get("[id=input-list]").children().first().children().last().contains('Eliminar')
+    cy.get("[type-btn=add-input-btn]").contains('Add')
+  })
 })
