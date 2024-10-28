@@ -29,7 +29,7 @@ describe('Add inputs.', () => {
     })
 })
 describe('Delete the input.', () => {
-    it('', () => {
+    it('The input can be deleted.', () => {
         const inputs = [
             {
                 id: '1',
