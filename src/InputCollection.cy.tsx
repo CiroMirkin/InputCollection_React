@@ -10,7 +10,7 @@ describe('Add inputs.', () => {
         )
         cy.get("[type-btn=add-input-btn]").click()
         cy.get("[id=input-list]").children().should('have.lengthOf', 1)
-  })
+    })
     it('Add a new input when an input already exist.', () => {
         const inputs = [
             {
@@ -26,7 +26,7 @@ describe('Add inputs.', () => {
         )
         cy.get("[type-btn=add-input-btn]").click()
         cy.get("[id=input-list]").children().should('have.lengthOf', 2)
-  })
+    })
 })
 describe('Delete the input.', () => {
     it('', () => {
@@ -44,7 +44,7 @@ describe('Delete the input.', () => {
         )
         cy.get("[type-btn=delete-input-btn]").click()
         cy.get("[id=input-list]").should('be.empty')
-  })
+    })
 })
 
 describe('Use config object.', () => {
@@ -69,26 +69,26 @@ describe('Use config object.', () => {
         )
         cy.get("[id=input-list]").children().first().children().last().contains('Eliminar')
         cy.get("[type-btn=add-input-btn]").contains('Agregar nombre')
-  })
+    })
 
-  it('The user config and the default config are merged.', () => {
-    const inputs = [
-        {
-            id: '1',
-            value: ''
+    it('The user config and the default config are merged.', () => {
+        const inputs = [
+            {
+                id: '1',
+                value: ''
+            }
+        ]
+        const config: InputCollectionConfig = {
+            textOfDeleteInputBtn: 'Eliminar',
         }
-    ]
-    const config: InputCollectionConfig = {
-        textOfDeleteInputBtn: 'Eliminar',
-    }
 
-    cy.mount(
-        <InputCollection inputs={inputs} config={config} >
-            <InputCollection.InputList />
-            <InputCollection.AddInputBtn />
-        </InputCollection>
-    )
-    cy.get("[id=input-list]").children().first().children().last().contains('Eliminar')
-    cy.get("[type-btn=add-input-btn]").contains('Add')
-  })
+        cy.mount(
+            <InputCollection inputs={inputs} config={config} >
+                <InputCollection.InputList />
+                <InputCollection.AddInputBtn />
+            </InputCollection>
+        )
+        cy.get("[id=input-list]").children().first().children().last().contains('Eliminar')
+        cy.get("[type-btn=add-input-btn]").contains('Add')
+    })
 })
