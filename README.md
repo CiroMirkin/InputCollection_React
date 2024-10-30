@@ -17,10 +17,12 @@ function App() {
     }
 
     return (
-        <InputCollection inputs={names} setInputs={setNames} className='container' config={config}>
-            <InputCollection.InputList/>
-            <InputCollection.AddInputBtn />
-        </InputCollection>
+        <InputCollection 
+            inputs={names} 
+            setInputs={setNames} 
+            className='container' 
+            config={config} 
+        />
     )
 }
 ```
@@ -41,10 +43,7 @@ function App() {
     ] as InputList)
 
     return (
-        <InputCollection inputs={inputs} setInputs={setInputs}>
-            <InputCollection.InputList />
-            <InputCollection.AddInputBtn />
-        </InputCollection>
+        <InputCollection inputs={inputs} setInputs={setInputs} />
     )
 }
 ```
