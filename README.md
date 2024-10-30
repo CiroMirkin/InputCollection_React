@@ -5,12 +5,12 @@
 ```jsx
 import { useState } from 'react'
 import './App.css'
-import InputCollection, { InputList } from './InputCollection'
+import InputCollection, { InputList, InputCollectionConfig } from './InputCollection'
 
 function App() {
     const [ names, setNames ] = useState([] as InputList)
 
-    const config = {
+    const config: InputCollectionConfig = {
         textOfDeleteInputBtn: 'Delete',
         textOfAddInputBtn: 'Add',
         inputsPlaceholder: 'Write the name...',
