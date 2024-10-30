@@ -28,10 +28,7 @@ function App() {
 
   return (
     <>
-      <InputCollection inputs={inputs} setInputs={setInputs} className='container' config={config}>
-        <InputCollection.InputList />
-        <InputCollection.AddInputBtn />
-      </InputCollection>
+      <InputCollection inputs={inputs} setInputs={setInputs} className='container' config={config} />
     </>
   )
 }

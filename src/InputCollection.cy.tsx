@@ -3,10 +3,7 @@ import InputCollection, { InputCollectionConfig } from './InputCollection'
 describe('Add inputs.', () => {
     it('Add an input when the collection is empty.', () => {
         cy.mount(
-            <InputCollection inputs={[]} >
-                <InputCollection.InputList />
-                <InputCollection.AddInputBtn />
-            </InputCollection>
+            <InputCollection inputs={[]} ></InputCollection>
         )
         cy.get("[type-btn=add-input-btn]").click()
         cy.get("[id=input-list]").children().should('have.lengthOf', 1)
@@ -19,10 +16,7 @@ describe('Add inputs.', () => {
             }
         ]
         cy.mount(
-            <InputCollection inputs={inputs} >
-                <InputCollection.InputList />
-                <InputCollection.AddInputBtn />
-            </InputCollection>
+            <InputCollection inputs={inputs} ></InputCollection>
         )
         cy.get("[type-btn=add-input-btn]").click()
         cy.get("[id=input-list]").children().should('have.lengthOf', 2)
@@ -37,10 +31,7 @@ describe('Delete the input.', () => {
             }
         ]
         cy.mount(
-            <InputCollection inputs={inputs} >
-                <InputCollection.InputList />
-                <InputCollection.AddInputBtn />
-            </InputCollection>
+            <InputCollection inputs={inputs} ></InputCollection>
         )
         cy.get("[type-btn=delete-input-btn]").click()
         cy.get("[id=input-list]").should('be.empty')
@@ -62,10 +53,7 @@ describe('Use config object.', () => {
         }
 
         cy.mount(
-            <InputCollection inputs={inputs} config={config} >
-                <InputCollection.InputList />
-                <InputCollection.AddInputBtn />
-            </InputCollection>
+            <InputCollection inputs={inputs} config={config} ></InputCollection>
         )
         cy.get("[id=input-list]").children().first().children().last().contains('Eliminar')
         cy.get("[type-btn=add-input-btn]").contains('Agregar nombre')
@@ -83,10 +71,7 @@ describe('Use config object.', () => {
         }
 
         cy.mount(
-            <InputCollection inputs={inputs} config={config} >
-                <InputCollection.InputList />
-                <InputCollection.AddInputBtn />
-            </InputCollection>
+            <InputCollection inputs={inputs} config={config} ></InputCollection>
         )
         cy.get("[id=input-list]").children().first().children().last().contains('Eliminar')
         cy.get("[type-btn=add-input-btn]").contains('Add')

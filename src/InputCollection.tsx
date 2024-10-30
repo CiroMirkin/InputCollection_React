@@ -54,13 +54,12 @@ const InputCollectionContext = createContext(InputCollectionContextDefault)
 interface InputCollectionParams {
     inputs: InputList
     setInputs?: React.Dispatch<React.SetStateAction<InputData[]>>
-    children: React.ReactNode
     className?: string
     config?: InputCollectionConfig
 }
 
 /** Expandable input list. */
-function InputCollection({ children, inputs, setInputs, className, config }: InputCollectionParams) {
+function InputCollection({ inputs, setInputs, className, config }: InputCollectionParams) {
     // This state is used if we don´t receive an external state
     const [ ownInputs, setOwnInputs ] = useState(inputs)
     // The order of the sentence inside the {} its important to merge the default config with the user config.
@@ -74,7 +73,8 @@ function InputCollection({ children, inputs, setInputs, className, config }: Inp
                     config: (config ? config : defaultConfig),
                 }} 
             >
-                { children }
+                <InputList/>
+                <AddInputBtn/>
             </InputCollectionContext.Provider>
         </div>
     )
@@ -102,8 +102,6 @@ function AddInputBtn({ }: { }) {
     )
 }
 
-InputCollection.AddInputBtn = AddInputBtn
-
 // Inputs
 
 function InputList() {
@@ -126,8 +124,6 @@ function InputList() {
     
     return (<div id="input-list">{ inputList }</div >)
 }
-
-InputCollection.InputList = InputList
 
 interface InputParams {
     id: string
