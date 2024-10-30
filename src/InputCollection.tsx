@@ -70,7 +70,7 @@ function InputCollection({ inputs, setInputs, className, config }: InputCollecti
         setInputs: !setInputs ? setOwnInputs : setInputs, 
         config: (config ? config : defaultConfig),
     }
-    
+
     return (
         <div className={className}>
             <InputCollectionContext.Provider value={inputCollectionContextProviderValue} >
@@ -84,7 +84,7 @@ function InputCollection({ inputs, setInputs, className, config }: InputCollecti
 export default InputCollection
 
 /** Allows to add a new empty input at the end of the input list. */
-function AddInputBtn({ }: { }) { 
+function AddInputBtn() { 
     const { inputs, setInputs, config } = useContext(InputCollectionContext)
     const buttonText = config.textOfAddInputBtn
     const className = config.classOfAddInputBtn
@@ -99,7 +99,13 @@ function AddInputBtn({ }: { }) {
     }
     
     return (
-        <button onClick={addInput} type-btn="add-input-btn" className={className}>{ buttonText }</button>
+        <button 
+            onClick={addInput} 
+            type-btn="add-input-btn" 
+            className={className}
+        >
+            { buttonText }
+        </button>
     )
 }
 
@@ -123,14 +129,14 @@ function InputList() {
 
     useEffect(renderInputs, [inputs.length])
     
-    return (<div id="input-list">{ inputList }</div >)
+    return (
+        <div id="input-list">
+            { inputList }
+        </div >
+    )
 }
 
-interface InputParams {
-    id: string
-}
-
-function Input({ id }: InputParams) {
+function Input({ id }: { id: string }) {
     const { inputs, setInputs, config } = useContext(InputCollectionContext)
     const type = config.inputsType
     const placeholder = config.inputsPlaceholder
@@ -163,11 +169,7 @@ function Input({ id }: InputParams) {
     )
 }
 
-interface DeleteInputBtnParams {
-    inputId: string
-}
-
-function DeleteInputBtn({ inputId }: DeleteInputBtnParams) {
+function DeleteInputBtn({ inputId }: { inputId: string }) {
     const { inputs, setInputs, config } = useContext(InputCollectionContext)
     const { classOfDeleteInputBtn, textOfDeleteInputBtn } = config
 
@@ -177,6 +179,12 @@ function DeleteInputBtn({ inputId }: DeleteInputBtnParams) {
     }
 
     return (
-        <button onClick={handleClick} type-btn="delete-input-btn" className={classOfDeleteInputBtn}>{ textOfDeleteInputBtn }</button>
+        <button 
+            onClick={handleClick} 
+            type-btn="delete-input-btn" 
+            className={classOfDeleteInputBtn}
+        >
+            { textOfDeleteInputBtn }
+        </button>
     )
 }
