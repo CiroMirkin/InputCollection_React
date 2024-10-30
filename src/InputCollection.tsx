@@ -64,15 +64,16 @@ function InputCollection({ inputs, setInputs, className, config }: InputCollecti
     const [ ownInputs, setOwnInputs ] = useState(inputs)
     // The order of the sentence inside the {} its important to merge the default config with the user config.
     config = {...defaultConfig, ...config} 
+
+    const inputCollectionContextProviderValue = { 
+        inputs: !setInputs ? ownInputs : inputs,
+        setInputs: !setInputs ? setOwnInputs : setInputs, 
+        config: (config ? config : defaultConfig),
+    }
+    
     return (
         <div className={className}>
-            <InputCollectionContext.Provider 
-                value={{ 
-                    setInputs: !setInputs ? setOwnInputs : setInputs, 
-                    inputs: !setInputs ? ownInputs : inputs,
-                    config: (config ? config : defaultConfig),
-                }} 
-            >
+            <InputCollectionContext.Provider value={inputCollectionContextProviderValue} >
                 <InputList/>
                 <AddInputBtn/>
             </InputCollectionContext.Provider>
