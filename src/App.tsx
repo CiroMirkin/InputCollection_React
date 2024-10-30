@@ -5,12 +5,8 @@ import InputCollection, { InputCollectionConfig } from './InputCollection'
 const testInputData = [
   {
     id: '1',
-    value: 'pipi'
+    value: 'Jack Torrance'
   },
-  {
-    id: '2',
-    value: 'pupu'
-  }
 ]
 
 function App() {
@@ -24,6 +20,7 @@ function App() {
     inputsType: "text",
     textOfAddInputBtn: 'Add',
     textOfDeleteInputBtn: 'Delete',
+    inputsPlaceholder: 'Write something...'
   }
 
   return (
