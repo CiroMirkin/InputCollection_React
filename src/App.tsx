@@ -10,7 +10,6 @@ const testInputData = [
 ]
 
 function App() {
-  /** Lista con el contenido de los inputs */
   const [ inputs, setInputs ] = useState([...testInputData])
 
   const config: InputCollectionConfig = {
