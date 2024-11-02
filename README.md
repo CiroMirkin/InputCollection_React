@@ -27,6 +27,29 @@ function App() {
 }
 ```
 
+Component with a custom button:
+
+```jsx
+import { useState } from 'react'
+import InputCollection, { InputList, InputCollectionConfig } from './InputCollection'
+
+function App() {
+    const [ names, setNames ] = useState([] as InputList)
+
+    const config: InputCollectionConfig = {
+        customBtnComponent: <button className={className}>Add</button>
+    }
+
+    return (
+        <InputCollection 
+            inputs={names} 
+            setInputs={setNames} 
+            config={config} 
+        />
+    )
+}
+```
+
 Component without optional attributes:
 
 ```tsx

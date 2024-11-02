@@ -20,7 +20,7 @@ function App() {
     inputsType: "text",
     textOfAddInputBtn: 'Add',
     textOfDeleteInputBtn: 'Delete',
-    inputsPlaceholder: 'Write something...'
+    inputsPlaceholder: 'Write something...',
   }
 
   return (
