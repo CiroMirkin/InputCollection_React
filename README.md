@@ -60,14 +60,14 @@ Component without optional attributes:
 ```jsx
 function App() {
     const [ inputs, setInputs ] = useState([
-    {
-        id: '1',
-        value: 'Lorem 1'
-    },
-    {
-        id: '2',
-        value: 'Lorem 2'
-    }
+        {
+            id: '1',
+            value: 'Lorem 1'
+        },
+        {
+            id: '2',
+            value: 'Lorem 2'
+        }
     ] as InputList)
 
     return (
