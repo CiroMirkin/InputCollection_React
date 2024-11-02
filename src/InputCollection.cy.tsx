@@ -8,6 +8,18 @@ describe('Add inputs.', () => {
         cy.get("[type-btn=add-input-btn]").click()
         cy.get("[id=input-list]").children().should('have.lengthOf', 1)
     })
+
+    it('Add an input when there is a custom button.', () => {
+        const config: InputCollectionConfig = {
+           customBtnComponent: <button>custom button</button>
+        }
+        cy.mount(
+            <InputCollection inputs={[]} config={config} />
+        )
+        cy.get("[type-btn=add-input-btn]").click()
+        cy.get("[id=input-list]").children().should('have.lengthOf', 1)
+    })
+
     it('Add a new input when an input already exist.', () => {
         const inputs = [
             {
@@ -75,5 +87,15 @@ describe('Use config object.', () => {
         )
         cy.get("[id=input-list]").children().first().children().last().contains('Eliminar')
         cy.get("[type-btn=add-input-btn]").contains('Add')
+    })
+
+    it('Custom button.', () => {
+        const config: InputCollectionConfig = {
+           customBtnComponent: <button>custom button</button>
+        }
+        cy.mount(
+            <InputCollection inputs={[]} config={config} />
+        )
+        cy.get("[type-btn=add-input-btn]").children().should('have.text', 'custom button')
     })
 })

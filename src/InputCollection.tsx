@@ -22,7 +22,7 @@ export interface InputCollectionConfig {
     inputsClassName?: string
     inputsPlaceholder?: string
     inputsType?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'hidden' | 'url'
-
+    customBtnComponent?: React.ReactNode
 }
 
 const defaultConfig: InputCollectionConfig = Object.freeze({
@@ -88,6 +88,7 @@ function AddInputBtn() {
     const { inputs, setInputs, config } = useContext(InputCollectionContext)
     const buttonText = config.textOfAddInputBtn
     const className = config.classOfAddInputBtn
+    const customBtn = config.customBtnComponent
 
     const addInput = () => {
         const newInput: InputData = {
@@ -98,15 +99,27 @@ function AddInputBtn() {
         setInputs(newInputsData)
     }
     
-    return (
-        <button 
-            onClick={addInput} 
-            type-btn="add-input-btn" 
-            className={className}
-        >
-            { buttonText }
-        </button>
-    )
+    const Btn = () =>
+        !!customBtn 
+            ? (
+                <span
+                    onClick={addInput} 
+                    type-btn="add-input-btn" 
+                >
+                    { customBtn }
+                </span>
+            )
+            : (
+                <button 
+                    onClick={addInput} 
+                    type-btn="add-input-btn" 
+                    className={className}
+                >
+                    { buttonText }
+                </button>
+            )
+
+    return ( <Btn /> )
 }
 
 // Inputs
