@@ -12,8 +12,13 @@ function App() {
 
     const config: InputCollectionConfig = {
         textOfDeleteInputBtn: 'Delete',
+        classOfDeleteInputBtn: 'btn',
         textOfAddInputBtn: 'Add',
+        classOfAddInputBtn: 'btn',
+        
         inputsPlaceholder: 'Write the name...',
+        inputsClassName: 'input',
+        inputsType: "text",
     }
 
     return (
