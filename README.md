@@ -52,7 +52,7 @@ function App() {
 
 Component without optional attributes:
 
-```tsx
+```jsx
 function App() {
     const [ inputs, setInputs ] = useState([
     {
