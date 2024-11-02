@@ -14,13 +14,14 @@ function App() {
   const [ inputs, setInputs ] = useState([...testInputData])
 
   const config: InputCollectionConfig = {
+    textOfDeleteInputBtn: 'Delete',
     classOfDeleteInputBtn: 'btn',
+    textOfAddInputBtn: 'Add',
     classOfAddInputBtn: 'btn',
+    
+    inputsPlaceholder: 'Write something...',
     inputsClassName: 'input',
     inputsType: "text",
-    textOfAddInputBtn: 'Add',
-    textOfDeleteInputBtn: 'Delete',
-    inputsPlaceholder: 'Write something...',
   }
 
   return (
